@@ -21,34 +21,63 @@ print(topic1)
 
     
 
+# def query_all_articles():
+#     articles = session.query(Knowledge).all()
+#     return articles
+
+
+# x= query_all_articles()
+# print(x)
+
+
+
+# def query_article_by_topic(chosen_topic):
+#     art = session.query(Knowledge).filter_by(chosen_topic=chosen_topic).first()
+#     return art
+# print(query_article_by_topic("swing dancing"))
+
+# def query_article_by_rating(rating):
+    # threshold= input("rating")
+    # rat = session.query(Knowledge).filter_by(rating<threshold).first()
+    # return rat
+
+
+    
+
+# def delete_article_by_topic(chosen_topic):
+#     dele = session.query(Knowledge).filter_by(chosen_topic=chosen_topic).delete()
+#     session.commit()
+# delete_article_by_topic("swing dancing")
+
+
+# def delete_all_articles():
+#     dele_all = session.query(Knowledge).delete()
+#     session.commit()
+# delete_all_articles()
+
 def query_all_articles():
     articles = session.query(Knowledge).all()
     return articles
 
 
-x= query_all_articles()
-print(x)
+
+def edit_article_rating(title, updated_rating):
+    articles = session.query(Knowledge).filter_by(title=title).all()
+    for article in articles:
+        article.rating = updated_rating
+    session.commit()
+edit_article_rating("charleston", 5)
+
+def delete_article_by_rating(threshold):
+    articles1 = session.query(Knowledge).all()
+    for article in articles1:
+        if article.rating<threshold:
+            session.delete(article)
+    session.commit()
+delete_article_by_rating(6)
+print(query_all_articles())
 
 
 
-def query_article_by_topic(chosen_topic):
-    art = session.query(Knowledge).filter_by(chosen_topic=chosen_topic).first()
-    return art
-print(query_article_by_topic("swing dancing"))
-
-def query_article_by_rating(rating):
-    threshold= input("rating")
-    rat = session.query(Knowledge).filter_by(rating<threshold).first()
-    return rat
 
 
-    
-
-def delete_article_by_topic():
-    pass
-
-def delete_all_articles():
-    pass
-
-def edit_article_rating():
-    pass
